@@ -1,5 +1,12 @@
 # Fed_Learning_Plus
 
+
+
+## Introduction
+
+This repository is the implementation of the following paper: FCIL
+
+## Table of Contents
 <!-- TOC -->
 
 - [Fed\_Learning\_Plus](#fed_learning_plus)
@@ -11,9 +18,16 @@
 
 <!-- /TOC -->
 
-# Relevant Method Papers
+## Baselines
 
-## 2024
+- iCaRL (incremental classifier and representation learning)
+- BiC (Bias Correction)
+
+
+## Relevant Method Papers
+
+### 2024
+---
 
 
 | model      | paper name                                                                                                        | link                                                                                                                                                                                | year | published                                                                                                                 |
@@ -29,19 +43,30 @@
 | Fedclass   |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
 | Fedit      |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
 |            |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
+---
 
-## 2023
-
-## 2022
-
+### 2023
+---
+---
+### 2022
+---
 
 | model | paper name                           | link                                     | year | published                                                                                                                                                                                                     |
 | ------- | -------------------------------------- | ------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GLFC  | Federated Class-Incremental Learning | [link](https://arxiv.org/pdf/2203.11473) | 2022 | [Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition(CVPR)](https://openaccess.thecvf.com/content/CVPR2022/html/Dong_Federated_Class-Incremental_Learning_CVPR_2022_paper.html) |
 |       |                                      |                                          |      |                                                                                                                                                                                                               |
 
-# Relevant Survey Papers
+---
 
+
+
+
+
+
+## Relevant Survey Papers
+
+### 2024
+---
 
 | paper name                                                                          | link                                                                                                                                                                                | year | published                                                                                                                     |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -55,3 +80,4 @@
 | Decentralized Federated Learning: A Survey and Perspective                          | [link](https://ieeexplore.ieee.org/abstract/document/10542323?casa_token=-rjp4ddD8bwAAAAA:_tQw3V15mf16V30nSjFi_uGEgPQCIOgSYcNyOE322fc8dFBTJgzwOhgvEMJ2JpFCeIU9Jv9rBTXa)             | 2024 | [IEEE Internet of Things Journal](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6488907)                           |
 | Emerging trends in federated learning: from model fusion to federated X learning    | [link](https://link.springer.com/article/10.1007/s13042-024-02119-1)                                                                                                                | 2024 | [International Journal of Machine Learning and Cybernetics](https://link.springer.com/journal/13042)                          |
 | Class-Incremental Learning: A Survey                                                | [link](https://ieeexplore.ieee.org/abstract/document/10599804?casa_token=RjdcdVGTr-cAAAAA:6Sjf9d0JJAUoGmwWQNZdTtVEtbQXrjlPMien4cTTWd9-pQCEctsMHhTnUaygdW4_uN9jJusbzscN)             | 2024 | [IEEE Transactions on Pattern Analysis and Machine Intelligence](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34) |
+---
