@@ -1,0 +1,7 @@
+# Python bytecode cache directories
+__pycache__/
+*.py[cod]
+
+# Dataset files and directories
+dataset/
+

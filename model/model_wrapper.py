@@ -6,7 +6,7 @@ code is adapted from github.com/conditionWang/FCIL
 '''
 import torch.nn as nn
 
-class ModelWrapper(nn.Module):
+class ClassificationWrapper(nn.Module):
     '''
     Wrapper for the model to add the final layer for classification
     '''

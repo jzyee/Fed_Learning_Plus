@@ -5,7 +5,6 @@ from torch.utils.data import DataLoader
 import logging
 
 from .metrics.accuracy import compute_accuracy
-from .metrics.entropy import EntropyMetric
 from .metrics.forgetting import ForgettingMetric
 
 logging.basicConfig(level=logging.INFO)
@@ -18,19 +17,16 @@ class FCILEvaluator:
     def __init__(
         self,
         model: nn.Module,
-        device: str = "cuda",
-        entropy_threshold: float = 1.2
+        device: str = "cuda"
     ):
         """
         Args:
             model: Neural network model to evaluate
             device: Device to run evaluation on
-            entropy_threshold: Threshold for entropy-based compensation
         """
         self.model = model
         self.device = device
         self.forgetting_metric = ForgettingMetric()
-        self.entropy_metric = EntropyMetric(threshold=entropy_threshold)
         self.results_history: List[Dict] = []
         
     def evaluate_task(
@@ -68,19 +64,11 @@ class FCILEvaluator:
             )
             forgetting_metrics = self.forgetting_metric.compute(seen_classes)
             
-            # Compute entropy metrics
-            entropy_metrics = self.entropy_metric.compute(
-                self.model,
-                test_loader,
-                self.device
-            )
-            
             # Compile results
             results = {
                 "task_id": task_id,
                 **accuracy_metrics,
                 **forgetting_metrics,
-                **entropy_metrics,
                 "seen_classes": len(seen_classes),
                 "timestamp": torch.cuda.Event(enable_timing=True)
             }
@@ -105,8 +93,5 @@ class FCILEvaluator:
             "final_accuracy": self.results_history[-1]["overall_accuracy"],
             "peak_accuracy": max(r["overall_accuracy"] for r in self.results_history),
             "final_forgetting": self.results_history[-1]["avg_forgetting"],
-            "total_tasks_evaluated": len(self.results_history),
-            "compensation_triggers": sum(
-                1 for r in self.results_history if r["compensation_needed"]
-            )
+            "total_tasks_evaluated": len(self.results_history)
         }

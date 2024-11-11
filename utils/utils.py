@@ -24,3 +24,11 @@ def weights_init(m):
             m.bias.data.uniform_(-0.5, 0.5)
     except Exception:
         print('warning: failed in weights_init for %s.bias' % m._get_name())
+
+def get_one_hot(target, num_classes, device):
+    '''
+    Get one-hot encoding of target(labels)
+    '''
+    one_hot=torch.zeros(target.shape[0], num_classes).cuda(device)
+    one_hot=one_hot.scatter(dim=1,index=target.long().view(-1,1),value=1.)
+    return one_hot
