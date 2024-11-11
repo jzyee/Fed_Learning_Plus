@@ -6,8 +6,16 @@ by any training method for the federated learning process.
 import copy
 import torch
 from torch.utils.data import DataLoader
+import torch.nn as nn
 
-def local_train(clients, index, model_g, task_id, model_old, ep_g, old_client):
+def local_train(
+        clients, 
+        index, 
+        model_g, 
+        task_id, 
+        model_old, 
+        ep_g, 
+        old_client):
     """
     Summary: local training for GLFC
 
@@ -19,15 +27,22 @@ def local_train(clients, index, model_g, task_id, model_old, ep_g, old_client):
 
 
     Args:
-        clients: the trainers
-        index: the index of the client
-        model_g: the global model
-        task_id: the id of the task
-        model_old: the old model
-        ep_g: the global epoch
-        old_client: the old clients
+        clients: List of client trainers
+        index: Index of current client
+        model_g: Global model
+        task_id: Current task ID
+        model_old: List of old models
+        ep_g: Global epoch
+        old_client: List of old client indices
     """
+    # First copy global model to local
     clients[index].model = copy.deepcopy(model_g)
+    
+    # Update model architecture if needed
+    out_features = clients[index].task_size * (task_id + 1)
+    if clients[index].model.fc.out_features != out_features:
+        in_features = clients[index].model.fc.in_features
+        clients[index].model.fc = nn.Linear(in_features, out_features).to(clients[index].device)
 
     if index in old_client:
         print(f"\nClient {index} (OLD CLIENT)")
@@ -36,17 +51,15 @@ def local_train(clients, index, model_g, task_id, model_old, ep_g, old_client):
         print(f"\nClient {index} (NEW CLIENT)")
         clients[index].beforeTrain(task_id, 1)
 
-    # for logging of the class assignment
     clients[index].log_class_assignment(index)
-
     clients[index].update_new_set()
     print(f'entropy signal: {clients[index].signal}')
+    
     clients[index].train(ep_g, model_old)
     local_model = clients[index].model.state_dict()
     proto_grad = clients[index].proto_grad_sharing()
 
     print('*' * 60)
-
     return local_model, proto_grad
 
 def participant_exemplar_storing(clients, num, model_g, old_client, task_id, clients_index):

@@ -17,6 +17,7 @@ import random
 from utils.fed_utils import local_train, participant_exemplar_storing, model_global_eval
 import copy
 from weight_agg.fed_avg import fed_avg
+import torch.nn as nn
 
 # set data class for args
 @dataclass
@@ -194,6 +195,9 @@ for epoch_g in range(training_args.epochs_global):
     
     # Calculate current task based on epoch
     task_id = epoch_g // epochs_per_task
+    print(f"Current epoch: {epoch_g}, Task ID: {task_id}, Epochs per task: {epochs_per_task}")
+    print(f"Model output size: {global_model.fc.out_features}")
+    print(f"Number of classes in first client: {trainers[0].numclass}")
     
     # Print progress information
     print(f"Current task: {task_id + 1}/{training_args.tasks_global}")
@@ -212,11 +216,33 @@ for epoch_g in range(training_args.epochs_global):
         old_clients_0 = [i for i in range(overall_client) if i not in old_clients_1]
         # update the number of clients
         num_clients = len(new_clients) + len(old_clients_1) + len(old_clients_0)
-        print(f"Task transition: Reassigning clients")
-        print(f"New clients: {len(new_clients)}, Old clients (new task): {len(old_clients_1)}, Old clients (old task): {len(old_clients_0)}")
-
+        
+        # Update model for new classes
+        num_classes = (task_id + 1) * training_args.task_size
+        in_features = global_model.fc.in_features
+        global_model.fc = nn.Linear(in_features, num_classes).to(training_args.device)
+        
+        # Update each trainer's model
+        for trainer in trainers:
+            trainer.model.fc = nn.Linear(in_features, num_classes).to(training_args.device)
+            if trainer.old_model is not None:
+                for old_m in trainer.old_model:
+                    old_m.fc = nn.Linear(in_features, num_classes).to(training_args.device)
+        
         classes_learned += training_args.task_size
-        global_model.incremental_learning(task_id)
+        
+        # # Update model capacity and final layer for new classes
+        # in_features = global_model.fc.in_features  # Get current input features
+        # global_model.fc = nn.Linear(in_features, classes_learned).cuda(training_args.device)  # Create new layer
+        # model_old = copy.deepcopy(global_model)  # Update old model too
+        
+        # # Update trainers
+        # for trainer in trainers:
+        #     trainer.numclass = classes_learned
+        #     trainer.model.fc = nn.Linear(in_features, classes_learned).cuda(training_args.device)
+
+        global_model.incremental_learning(classes_learned)
+        global_model.to(training_args.device)
     
     print(f"federated global round {epoch_g + 1}/{training_args.epochs_global}, task {task_id + 1}/{training_args.tasks_global}, classes seen: {classes_learned}")
 
@@ -227,37 +253,44 @@ for epoch_g in range(training_args.epochs_global):
     print(f"selected clients: {clients_index}")
 
     for c in clients_index:
+        # Before local training
+        print(f"\nBefore training client {c}:")
+        print(f"Task ID: {task_id}")
+        print(f"Global model output size: {global_model.fc.out_features}")
+        print(f"Client model output size: {trainers[c].model.fc.out_features}")
+        print(f"Client numclass: {trainers[c].numclass}")
+        
         local_model, proto_grad = local_train(trainers, c, global_model, task_id, model_old, epoch_g, old_clients_0)
         w_local.append(local_model)
         if proto_grad is not None:
             for grad_i in proto_grad:
                 pool_grad.append(grad_i)
 
-    print('update every participant/client examplar set and old model')
-    participant_exemplar_storing(trainers, training_args.local_clients, global_model, old_clients_0, task_id, clients_index )
-    print('update completed')
+    # print('update every participant/client examplar set and old model')
+    # participant_exemplar_storing(trainers, training_args.local_clients, global_model, old_clients_0, task_id, clients_index )
+    # print('update completed')
 
     
 
-    print('federated aggregation start')
-    w_g_new = fed_avg(w_local)
-    w_g_last = copy.deepcopy(global_model.state_dict())
-    print('federated aggregation completed')
+    # print('federated aggregation start')
+    # w_g_new = fed_avg(w_local)
+    # w_g_last = copy.deepcopy(global_model.state_dict())
+    # print('federated aggregation completed')
 
-    global_model.load_state_dict(w_g_new)
+    # global_model.load_state_dict(w_g_new)
 
-    print('set up an exemplar set and old model')
-    proxy_server.model = copy.deepcopy(global_model)
-    proxy_server.dataloader(pool_grad)
-    print('set up completed')
+    # print('set up an exemplar set and old model')
+    # proxy_server.model = copy.deepcopy(global_model)
+    # proxy_server.dataloader(pool_grad)
+    # print('set up completed')
     
-    acc_global = model_global_eval(global_model, test_dataset, task_id, training_args.task_size, training_args.device)
-    log_str = 'Task: {}, Round: {} Accuracy = {:.2f}%'.format(task_id, epoch_g, acc_global)
-    out_file.write(log_str + '\n')
-    out_file.flush()
-    print('classification accuracy of global model at round %d: %.3f \n' % (epoch_g, acc_global))
+    # acc_global = model_global_eval(global_model, test_dataset, task_id, training_args.task_size, training_args.device)
+    # log_str = 'Task: {}, Round: {} Accuracy = {:.2f}%'.format(task_id, epoch_g, acc_global)
+    # out_file.write(log_str + '\n')
+    # out_file.flush()
+    # print('classification accuracy of global model at round %d: %.3f \n' % (epoch_g, acc_global))
 
-    old_task_id = task_id
+    # old_task_id = task_id
 
 # # Run federated learning process across multiple tasks
 # for task_id in range(training_args.tasks_global):

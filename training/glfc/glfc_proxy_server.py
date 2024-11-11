@@ -34,7 +34,7 @@ class ProxyServer:
             feature_extractor,
             numclass,
             feature_dim=feature_dim,
-            # is_feature_extractor=True
+            is_feature_extractor=True
             ).to(device)
         self.encode_model = encode_model.to(device)
         self.monitor_dataset = Proxy_Data(test_transform)

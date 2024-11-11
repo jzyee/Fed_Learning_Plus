@@ -11,7 +11,7 @@ class GLFCModel(nn.Module):
         base_model: nn.Module,
         num_classes: int,
         feature_dim: int = 512,
-        is_feature_extractor: bool = False
+        is_feature_extractor: bool = True
     ):
         """
         Args:

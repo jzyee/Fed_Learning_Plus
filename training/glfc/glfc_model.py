@@ -15,7 +15,7 @@ class GLFCModel(ClassificationModel):
         base_model: nn.Module,
         num_classes: int,
         feature_dim: Optional[int] = None,
-        # is_feature_extractor: bool = False,
+        is_feature_extractor: bool = False,
         memory_size: int = 2000
     ):
         super().__init__(

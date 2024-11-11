@@ -44,7 +44,7 @@ class GLFCTrainer:
         encode_model: nn.Module,
         iid_level: int,
         feature_dim: Optional[int] = None,
-        is_feature_extractor: bool = False,
+        # is_feature_extractor: bool = False,
         
     ):
         """
@@ -107,6 +107,7 @@ class GLFCTrainer:
         self.last_class = None
         self.task_id_old = -1
         self.last_entropy = 0
+        
 
     # get incremental train data
     def beforeTrain(self, task_id_new: int, group: int):
