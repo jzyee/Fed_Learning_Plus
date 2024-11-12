@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set environment variables if needed
-export CUDA_VISIBLE_DEVICES=0,1,2,3
+export CUDA_VISIBLE_DEVICES=2
 
 # Run training script with arguments
 python train_model.py \

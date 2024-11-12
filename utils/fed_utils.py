@@ -51,7 +51,9 @@ def local_train(
         print(f"\nClient {index} (NEW CLIENT)")
         clients[index].beforeTrain(task_id, 1)
 
+    # for logging of the class assignment
     clients[index].log_class_assignment(index)
+
     clients[index].update_new_set()
     print(f'entropy signal: {clients[index].signal}')
     
@@ -60,6 +62,7 @@ def local_train(
     proto_grad = clients[index].proto_grad_sharing()
 
     print('*' * 60)
+
     return local_model, proto_grad
 
 def participant_exemplar_storing(clients, num, model_g, old_client, task_id, clients_index):

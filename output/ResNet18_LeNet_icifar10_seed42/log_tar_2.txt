@@ -1,1 +1,6 @@
 method_GLFC, task_size_2, learning_rate_0.1
+Task: 0, Round: 0 Accuracy = 54.30%
+Task: 1, Round: 1 Accuracy = 37.33%
+Task: 2, Round: 2 Accuracy = 28.17%
+Task: 3, Round: 3 Accuracy = 22.59%
+Task: 4, Round: 4 Accuracy = 16.75%
