@@ -1,12 +1,11 @@
 # Fed_Learning_Plus
 
-
-
 ## Introduction
 
 This repository is the implementation of the following paper: FCIL
 
 ## Table of Contents
+
 <!-- TOC -->
 
 - [Fed\_Learning\_Plus](#fed_learning_plus)
@@ -23,10 +22,20 @@ This repository is the implementation of the following paper: FCIL
 - iCaRL (incremental classifier and representation learning)
 - BiC (Bias Correction)
 
+## How to get script running
+
+this will run the bash file and save the output of the bash file into a .txt so that the output is not lost.
+
+
+
+```
+bash run_glfc_cifar10.sh > output_glfc_cifar10.txt
+```
 
 ## Relevant Method Papers
 
 ### 2024
+
 ---
 
 
@@ -43,13 +52,19 @@ This repository is the implementation of the following paper: FCIL
 | Fedclass   |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
 | Fedit      |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
 |            |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
+
 ---
 
 ### 2023
+
 ---
+
 ---
+
 ### 2022
+
 ---
+
 
 | model | paper name                           | link                                     | year | published                                                                                                                                                                                                     |
 | ------- | -------------------------------------- | ------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -58,15 +73,12 @@ This repository is the implementation of the following paper: FCIL
 
 ---
 
-
-
-
-
-
 ## Relevant Survey Papers
 
 ### 2024
+
 ---
+
 
 | paper name                                                                          | link                                                                                                                                                                                | year | published                                                                                                                     |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -80,4 +92,5 @@ This repository is the implementation of the following paper: FCIL
 | Decentralized Federated Learning: A Survey and Perspective                          | [link](https://ieeexplore.ieee.org/abstract/document/10542323?casa_token=-rjp4ddD8bwAAAAA:_tQw3V15mf16V30nSjFi_uGEgPQCIOgSYcNyOE322fc8dFBTJgzwOhgvEMJ2JpFCeIU9Jv9rBTXa)             | 2024 | [IEEE Internet of Things Journal](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6488907)                           |
 | Emerging trends in federated learning: from model fusion to federated X learning    | [link](https://link.springer.com/article/10.1007/s13042-024-02119-1)                                                                                                                | 2024 | [International Journal of Machine Learning and Cybernetics](https://link.springer.com/journal/13042)                          |
 | Class-Incremental Learning: A Survey                                                | [link](https://ieeexplore.ieee.org/abstract/document/10599804?casa_token=RjdcdVGTr-cAAAAA:6Sjf9d0JJAUoGmwWQNZdTtVEtbQXrjlPMien4cTTWd9-pQCEctsMHhTnUaygdW4_uN9jJusbzscN)             | 2024 | [IEEE Transactions on Pattern Analysis and Machine Intelligence](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34) |
+
 ---

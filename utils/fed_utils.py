@@ -7,6 +7,7 @@ import copy
 import torch
 from torch.utils.data import DataLoader
 import torch.nn as nn
+from torchvision import transforms
 
 def local_train(
         clients, 
@@ -78,19 +79,31 @@ def participant_exemplar_storing(clients, num, model_g, old_client, task_id, cli
 
 
 
-def model_global_eval(model_g, test_dataset, task_id, task_size, device):
-    # model_to_device(model_g, False, device)
-    model_g.eval()
+def model_global_eval(model, test_dataset, task_id, task_size, device):
+    # # Add transforms to convert PIL Images to tensors
+    # transform = transforms.Compose([
+    #     transforms.ToTensor(),
+    #     transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))  # CIFAR-10 normalization
+    # ])
+    
+    # # Apply transforms to the test dataset if not already applied
+    # if not hasattr(test_dataset, 'transform') or test_dataset.transform is None:
+    #     test_dataset.transform = transform
+
+    model.to(device)
+    model.eval()
     test_dataset.getTestData([0, task_size * (task_id + 1)])
-    test_loader = DataLoader(dataset=test_dataset, shuffle=True, batch_size=128)
+    
+    test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False)
+    
     correct, total = 0, 0
     for setp, (indexs, imgs, labels) in enumerate(test_loader):
         imgs, labels = imgs.cuda(device), labels.cuda(device)
         with torch.no_grad():
-            outputs = model_g(imgs)
+            outputs = model(imgs)
         predicts = torch.max(outputs, dim=1)[1]
         correct += (predicts.cpu() == labels.cpu()).sum()
         total += len(labels)
     accuracy = 100 * correct / total
-    model_g.train()
+    model.train()
     return accuracy

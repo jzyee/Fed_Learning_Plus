@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from dataclasses import dataclass, field
 import argparse
 from model.model_factory import load_model
@@ -11,7 +15,6 @@ from model.classification_model import ClassificationModel
 from training.training_factory import load_training_method
 from training.glfc.glfc_proxy_server import ProxyServer
 import torch
-import os
 import os.path as osp
 import random
 from utils.fed_utils import local_train, participant_exemplar_storing, model_global_eval
@@ -281,7 +284,7 @@ for epoch_g in range(training_args.epochs_global):
     print('set up an exemplar set and old model')
     proxy_server.model = copy.deepcopy(global_model)
     proxy_server.dataloader(pool_grad)
-    print('set up completed')
+    print('set up of examplar completed')
     
     acc_global = model_global_eval(global_model, test_dataset, task_id, training_args.task_size, training_args.device)
     log_str = 'Task: {}, Round: {} Accuracy = {:.2f}%'.format(task_id, epoch_g, acc_global)
@@ -346,3 +349,4 @@ for epoch_g in range(training_args.epochs_global):
 
 
 
+# 
