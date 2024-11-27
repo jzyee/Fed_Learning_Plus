@@ -4,10 +4,10 @@
 export CUDA_VISIBLE_DEVICES=2
 
 # Run training script with arguments
-python train_glfc.py \
+python scripts/train_faglfc.py \
   --model_name "ResNet18" \
   --encoder_name "LeNet" \
-  --dataset_name "icifar10" \
+  --dataset_name "mri_tumor_17" \
   --img_size 32 \
   --batch_size 128 \
   --num_clients 10 \
@@ -18,9 +18,9 @@ python train_glfc.py \
   --epochs_local 5 \
   --epochs_global 5 \
   --learning_rate 0.1 \
-  --method "GLFC" \
+  --method "FAGLFC" \
   --task_size 2 \
   --tasks_global 5 \
   --iid_level 2 \
-  --output_dir "./output" \
+  --output_dir "../output" \
   --seed 42

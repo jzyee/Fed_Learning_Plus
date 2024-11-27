@@ -1,0 +1,445 @@
+Files already downloaded and verified
+Files already downloaded and verified
+no. of trainers: 10
+
+Training Configuration:
+Total epochs: 5
+Total tasks: 5
+Epochs per task: 1
+Classes per task: 2
+
+
+Global epoch 1/5
+Current epoch: 0, Task ID: 0, Epochs per task: 1
+Model output size: 2
+Number of classes in first client: 0
+Current task: 1/5
+Epochs remaining in current task: 1
+federated global round 1/5, task 1/5, classes seen: 2
+no. of local clients: 5
+selected clients: [1, 0, 4, 9, 6]
+
+Before training client 1:
+Task ID: 0
+Global model output size: 2
+Client model output size: 2
+Client numclass: 0
+
+Client 1 (NEW CLIENT)
+Client 1 assigned classes: [0, 1]
+overall_avg: 0.43086177110671997
+entropy signal: False
+************************************************************
+
+Before training client 0:
+Task ID: 0
+Global model output size: 2
+Client model output size: 2
+Client numclass: 0
+
+Client 0 (NEW CLIENT)
+Client 0 assigned classes: [0, 1]
+overall_avg: 0.4299260377883911
+entropy signal: False
+************************************************************
+
+Before training client 4:
+Task ID: 0
+Global model output size: 2
+Client model output size: 2
+Client numclass: 0
+
+Client 4 (NEW CLIENT)
+Client 4 assigned classes: [0, 1]
+overall_avg: 0.4302275478839874
+entropy signal: False
+************************************************************
+
+Before training client 9:
+Task ID: 0
+Global model output size: 2
+Client model output size: 2
+Client numclass: 0
+
+Client 9 (NEW CLIENT)
+Client 9 assigned classes: [0, 1]
+overall_avg: 0.4301906228065491
+entropy signal: False
+************************************************************
+
+Before training client 6:
+Task ID: 0
+Global model output size: 2
+Client model output size: 2
+Client numclass: 0
+
+Client 6 (NEW CLIENT)
+Client 6 assigned classes: [0, 1]
+overall_avg: 0.43048223853111267
+entropy signal: False
+************************************************************
+update every participant/client examplar set and old model
+overall_avg: 0.4300142228603363
+overall_avg: 0.4305247962474823
+update completed
+federated aggregation start
+federated aggregation completed
+set up an exemplar set and old model
+current performance: 0
+set up completed
+classification accuracy of global model at round 0: 78.650 
+
+
+Global epoch 2/5
+Current epoch: 1, Task ID: 1, Epochs per task: 1
+Model output size: 2
+Number of classes in first client: 2
+Current task: 2/5
+Epochs remaining in current task: 1
+federated global round 2/5, task 2/5, classes seen: 4
+no. of local clients: 5
+selected clients: [0, 2, 6, 8, 7]
+
+Before training client 0:
+Task ID: 1
+Global model output size: 4
+Client model output size: 4
+Client numclass: 2
+
+Client 0 (OLD CLIENT)
+Client 0 assigned classes: [0, 1]
+overall_avg: 1.2796428203582764
+entropy signal: False
+************************************************************
+
+Before training client 2:
+Task ID: 1
+Global model output size: 4
+Client model output size: 4
+Client numclass: 2
+
+Client 2 (NEW CLIENT)
+Client 2 assigned classes: [2, 3]
+overall_avg: 1.2935242652893066
+entropy signal: False
+************************************************************
+
+Before training client 6:
+Task ID: 1
+Global model output size: 4
+Client model output size: 4
+Client numclass: 2
+
+Client 6 (NEW CLIENT)
+Client 6 assigned classes: [2, 3]
+overall_avg: 1.2934257984161377
+entropy signal: False
+************************************************************
+
+Before training client 8:
+Task ID: 1
+Global model output size: 4
+Client model output size: 4
+Client numclass: 0
+
+Client 8 (NEW CLIENT)
+Client 8 assigned classes: [2, 3]
+overall_avg: 1.293752670288086
+entropy signal: True
+load old model
+************************************************************
+
+Before training client 7:
+Task ID: 1
+Global model output size: 4
+Client model output size: 4
+Client numclass: 0
+
+Client 7 (NEW CLIENT)
+Client 7 assigned classes: [2, 3]
+overall_avg: 1.2934508323669434
+entropy signal: True
+load old model
+************************************************************
+update every participant/client examplar set and old model
+overall_avg: 1.2936084270477295
+overall_avg: 1.2934703826904297
+overall_avg: 1.2935409545898438
+update completed
+federated aggregation start
+federated aggregation completed
+set up an exemplar set and old model
+for class: 2, current loss: 0.07024293392896652
+for class: 2, current loss: 0.024673916399478912
+for class: 3, current loss: 0.11601505428552628
+for class: 3, current loss: 0.04680485278367996
+current performance: 46.875
+set up completed
+classification accuracy of global model at round 1: 31.575 
+
+
+Global epoch 3/5
+Current epoch: 2, Task ID: 2, Epochs per task: 1
+Model output size: 4
+Number of classes in first client: 4
+Current task: 3/5
+Epochs remaining in current task: 1
+federated global round 3/5, task 3/5, classes seen: 6
+no. of local clients: 5
+selected clients: [9, 5, 3, 8, 0]
+
+Before training client 9:
+Task ID: 2
+Global model output size: 6
+Client model output size: 6
+Client numclass: 2
+
+Client 9 (NEW CLIENT)
+Client 9 assigned classes: [4, 5]
+overall_avg: 1.7080154418945312
+entropy signal: True
+load old model
+************************************************************
+
+Before training client 5:
+Task ID: 2
+Global model output size: 6
+Client model output size: 6
+Client numclass: 0
+
+Client 5 (NEW CLIENT)
+Client 5 assigned classes: [4, 5]
+overall_avg: 1.707869529724121
+entropy signal: True
+load old model
+************************************************************
+
+Before training client 3:
+Task ID: 2
+Global model output size: 6
+Client model output size: 6
+Client numclass: 4
+
+Client 3 (OLD CLIENT)
+Client 3 assigned classes: [2, 3]
+overall_avg: 1.7041878700256348
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 8:
+Task ID: 2
+Global model output size: 6
+Client model output size: 6
+Client numclass: 4
+
+Client 8 (NEW CLIENT)
+Client 8 assigned classes: [4, 5]
+overall_avg: 1.7079863548278809
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 0:
+Task ID: 2
+Global model output size: 6
+Client model output size: 6
+Client numclass: 4
+
+Client 0 (NEW CLIENT)
+Client 0 assigned classes: [4, 5]
+overall_avg: 1.7075996398925781
+entropy signal: False
+load old model
+************************************************************
+update every participant/client examplar set and old model
+overall_avg: 1.7078062295913696
+overall_avg: 1.7077558040618896
+overall_avg: 1.7076826095581055
+update completed
+federated aggregation start
+federated aggregation completed
+set up an exemplar set and old model
+for class: 4, current loss: 0.044082388281822205
+for class: 4, current loss: 1.2570292949676514
+for class: 5, current loss: 279.09326171875
+for class: 5, current loss: 269.7921447753906
+current performance: 45.3125
+set up completed
+classification accuracy of global model at round 2: 28.483 
+
+
+Global epoch 4/5
+Current epoch: 3, Task ID: 3, Epochs per task: 1
+Model output size: 6
+Number of classes in first client: 6
+Current task: 4/5
+Epochs remaining in current task: 1
+federated global round 4/5, task 4/5, classes seen: 8
+no. of local clients: 5
+selected clients: [8, 3, 2, 9, 6]
+
+Before training client 8:
+Task ID: 3
+Global model output size: 8
+Client model output size: 8
+Client numclass: 6
+
+Client 8 (NEW CLIENT)
+Client 8 assigned classes: [6, 7]
+overall_avg: 1.9627153873443604
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 3:
+Task ID: 3
+Global model output size: 8
+Client model output size: 8
+Client numclass: 6
+
+Client 3 (NEW CLIENT)
+Client 3 assigned classes: [6, 7]
+overall_avg: 1.9629894495010376
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 2:
+Task ID: 3
+Global model output size: 8
+Client model output size: 8
+Client numclass: 6
+
+Client 2 (NEW CLIENT)
+Client 2 assigned classes: [6, 7]
+overall_avg: 1.962586522102356
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 9:
+Task ID: 3
+Global model output size: 8
+Client model output size: 8
+Client numclass: 6
+
+Client 9 (NEW CLIENT)
+Client 9 assigned classes: [6, 7]
+overall_avg: 1.9629135131835938
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 6:
+Task ID: 3
+Global model output size: 8
+Client model output size: 8
+Client numclass: 4
+
+Client 6 (NEW CLIENT)
+Client 6 assigned classes: [6, 7]
+overall_avg: 1.9630264043807983
+entropy signal: False
+load old model
+************************************************************
+update every participant/client examplar set and old model
+overall_avg: 1.9632267951965332
+overall_avg: 1.9478693008422852
+overall_avg: 1.9628753662109375
+update completed
+federated aggregation start
+federated aggregation completed
+set up an exemplar set and old model
+current performance: 0
+set up completed
+classification accuracy of global model at round 3: 22.800 
+
+
+Global epoch 5/5
+Current epoch: 4, Task ID: 4, Epochs per task: 1
+Model output size: 8
+Number of classes in first client: 8
+Current task: 5/5
+Epochs remaining in current task: 1
+federated global round 5/5, task 5/5, classes seen: 10
+no. of local clients: 5
+selected clients: [8, 9, 4, 5, 7]
+
+Before training client 8:
+Task ID: 4
+Global model output size: 10
+Client model output size: 10
+Client numclass: 8
+
+Client 8 (NEW CLIENT)
+Client 8 assigned classes: [8, 9]
+overall_avg: 2.2180323600769043
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 9:
+Task ID: 4
+Global model output size: 10
+Client model output size: 10
+Client numclass: 8
+
+Client 9 (NEW CLIENT)
+Client 9 assigned classes: [8, 9]
+overall_avg: 2.2181150913238525
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 4:
+Task ID: 4
+Global model output size: 10
+Client model output size: 10
+Client numclass: 8
+
+Client 4 (OLD CLIENT)
+Client 4 assigned classes: [6, 7]
+overall_avg: 2.2160098552703857
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 5:
+Task ID: 4
+Global model output size: 10
+Client model output size: 10
+Client numclass: 6
+
+Client 5 (NEW CLIENT)
+Client 5 assigned classes: [8, 9]
+overall_avg: 2.217900514602661
+entropy signal: False
+load old model
+************************************************************
+
+Before training client 7:
+Task ID: 4
+Global model output size: 10
+Client model output size: 10
+Client numclass: 4
+
+Client 7 (NEW CLIENT)
+Client 7 assigned classes: [8, 9]
+overall_avg: 2.217820644378662
+entropy signal: False
+load old model
+************************************************************
+update every participant/client examplar set and old model
+overall_avg: 2.2178938388824463
+overall_avg: 2.21834135055542
+overall_avg: 2.2180123329162598
+overall_avg: 2.218412399291992
+update completed
+federated aggregation start
+federated aggregation completed
+set up an exemplar set and old model
+current performance: 0
+set up completed
+classification accuracy of global model at round 4: 17.750 
+

@@ -111,24 +111,37 @@ class GLFCTrainer:
 
     # get incremental train data
     def beforeTrain(self, task_id_new: int, group: int):
-        '''
-        this function is called before training the model
+        """
+        Prepare model and data for training on new task
         
-        params:
-            - task_id_new: the id of the new task
-            - group: the group of clients
-        '''
+        Args:
+            task_id_new: ID of the new task
+            group: Client group (0=old clients, 1=new clients)
+        """
         if task_id_new != self.task_id_old:
             self.task_id_old = task_id_new
             self.numclass = self.task_size * (task_id_new + 1)
+            
+            # # Update model architecture for new classes
+            # in_features = self.model.fc.in_features
+            # out_features = self.task_size * (task_id_new + 1)  # Total classes seen so far
+            # self.model.fc = nn.Linear(in_features, out_features).to(self.device)
+            
+            # # Update old models if they exist
+            # if hasattr(self, 'old_model') and self.old_model:
+            #     for old_m in self.old_model:
+            #         old_m.fc = nn.Linear(in_features, out_features).to(self.device)
+            
             if group != 0:
-                if self.current_class != None:
+                if self.current_class is not None:
                     self.last_class = self.current_class
-                self.current_class = random.sample([x for x in range(self.numclass - self.task_size, self.numclass)], self.iid_level)
-                # print(self.current_class)
+                self.current_class = random.sample(
+                    [x for x in range(self.numclass - self.task_size, self.numclass)],
+                    self.iid_level
+                )
             else:
                 self.last_class = None
-
+                
         self.train_loader = self._get_train_and_test_dataloader(self.current_class, False)
         
     def update_new_set(self):
@@ -242,7 +255,7 @@ class GLFCTrainer:
                 all_label = torch.cat((all_label, labels.long().cpu()), 0)
 
         overall_avg = torch.mean(all_ent).item()
-        print(f'overall_avg: {overall_avg}')
+        print(f'overall_avg_entropy: {overall_avg}')
         if overall_avg - self.last_entropy > 1.2:
             res = True
         
