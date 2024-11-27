@@ -125,9 +125,9 @@ class GLFCTrainer:
                 if self.current_class != None:
                     self.last_class = self.current_class
                 self.current_class = random.sample([x for x in range(self.numclass - self.task_size, self.numclass)], self.iid_level)
-                # print(self.current_class)
             else:
                 self.last_class = None
+                self.current_class = list(range(0, self.numclass - self.task_size))
 
         self.train_loader = self._get_train_and_test_dataloader(self.current_class, False)
         
