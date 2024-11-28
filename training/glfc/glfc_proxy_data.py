@@ -46,6 +46,7 @@ class Proxy_Data():
             return self.getTestItem(index)
 
     def __len__(self):
-        if self.TestData.size > 0:
+        test_data_array = np.array(self.TestData)
+        if test_data_array.size > 0:
             return len(self.TestData)
         return 0

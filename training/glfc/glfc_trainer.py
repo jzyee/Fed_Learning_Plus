@@ -28,6 +28,9 @@ from torch.utils.data import DataLoader
 from utils.utils import get_one_hot
 from eval.metrics.entropy import entropy
 import copy
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 class GLFCTrainer:
 
@@ -107,6 +110,9 @@ class GLFCTrainer:
         self.last_class = None
         self.task_id_old = -1
         self.last_entropy = 0
+        
+        self.class_accuracies = []  # Store accuracies per round
+        self.final_accuracies = {}  # Store final accuracies for all rounds
         
 
     # get incremental train data
@@ -381,7 +387,8 @@ class GLFCTrainer:
             label_np = label
             
             data, label = tt(data), torch.Tensor([label]).long()
-            data, label = data.cuda(self.device), label.cuda(self.device)
+            data = data.to(self.device) if torch.cuda.is_available() else data
+            label = label.to(self.device) if torch.cuda.is_available() else label
             data = data.unsqueeze(0).requires_grad_(True)
             target = get_one_hot(label, self.numclass, self.device)
 
@@ -411,3 +418,45 @@ class GLFCTrainer:
         if self.current_class is not None:
             classes_str = ', '.join(map(str, sorted(self.current_class)))
             print(f"Client {client_index} assigned classes: [{classes_str}]")
+
+    def record_final_accuracy(self, round_num, test_loader):
+        """Record final accuracy for each class after training"""
+        accuracies = self.evaluate_class_wise(test_loader)
+        self.final_accuracies[round_num] = accuracies
+
+    def plot_final_forgetting_heatmap(self, save_path):
+        """Plot final heatmap showing forgetting across all rounds"""
+        # Convert final accuracies to DataFrame format
+        rounds = sorted(self.final_accuracies.keys())
+        classes = sorted(set().union(*[acc.keys() for acc in self.final_accuracies.values()]))
+        
+        data = np.zeros((len(rounds), len(classes)))
+        for i, round_num in enumerate(rounds):
+            for j, class_id in enumerate(classes):
+                data[i][j] = self.final_accuracies[round_num].get(class_id, 0)
+        
+        df = pd.DataFrame(
+            data,
+            index=[f"Round {r}" for r in rounds],
+            columns=[f"Class {c}" for c in classes]
+        )
+        
+        # Create heatmap
+        plt.figure(figsize=(12, 8))
+        sns.heatmap(
+            df,
+            annot=True,
+            fmt='.1f',
+            cmap='YlOrRd',
+            vmin=0,
+            vmax=100,
+            cbar_kws={'label': 'Accuracy %'}
+        )
+        
+        plt.title("Class-Wise Forgetting Heatmap")
+        plt.xlabel("Classes")
+        plt.ylabel("Communication Rounds")
+        
+        # Save plot
+        plt.savefig(save_path, bbox_inches='tight', dpi=300)
+        plt.close()
