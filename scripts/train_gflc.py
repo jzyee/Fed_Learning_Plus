@@ -21,7 +21,8 @@ from utils.fed_utils import local_train, participant_exemplar_storing, model_glo
 import copy
 from weight_agg.fed_avg import fed_avg
 import torch.nn as nn
-
+from training.utils.metrics import TrainingMetrics
+from utils.fed_utils import visualize_class_forgetting
 # set data class for args
 @dataclass
 class ModelArgs:
@@ -55,7 +56,7 @@ class TrainingArgs:
         metadata={"help": "random seed for training"})
     num_clients: int = field(
         default=30,
-        metadata={"help": "number of clients"})
+        metadata={"help": "number of local clients"})
     num_classes: int = field(
         default=10,
         metadata={"help": "number of data classes in the first task"})
@@ -113,7 +114,7 @@ model_args, encoder_args, dataset_args, training_args = parser.parse_args_into_d
 
 
 # set the output directory
-output_dir = osp.join(training_args.output_dir, f"{model_args.model_name}_{encoder_args.encoder_name}_{dataset_args.dataset_name}_seed{training_args.seed}")
+output_dir = osp.join(training_args.output_dir, f"{model_args.model_name}_{encoder_args.encoder_name}_{dataset_args.dataset_name}_seed{training_args.seed}_ts{training_args.task_size}_t{training_args.tasks_global}_eplcl{training_args.epochs_local}_epglb{training_args.epochs_global}__iid{training_args.iid_level}_m{training_args.memory_size}")
 if not osp.exists(output_dir):
     os.makedirs(output_dir, exist_ok=True)
 
@@ -185,11 +186,15 @@ old_task_id = -1
 
 # Calculate epochs per task based on total epochs and number of tasks
 epochs_per_task = training_args.epochs_global // training_args.tasks_global
+# epochs_per_task = training_args.epochs_global
 print(f"\nTraining Configuration:")
 print(f"Total epochs: {training_args.epochs_global}")
 print(f"Total tasks: {training_args.tasks_global}")
 print(f"Epochs per task: {epochs_per_task}")
 print(f"Classes per task: {training_args.task_size}\n")
+
+# Initialize metrics tracker at the start of training
+metrics_tracker = TrainingMetrics()
 
 for epoch_g in range(training_args.epochs_global):
     print(f"\nGlobal epoch {epoch_g + 1}/{training_args.epochs_global}")
@@ -292,61 +297,29 @@ for epoch_g in range(training_args.epochs_global):
     out_file.flush()
     print('classification accuracy of global model at round %d: %.3f \n' % (epoch_g, acc_global))
 
+    # visualize the class forgetting heatmap 
+    # if training args.global epoch > 10
+    if training_args.epochs_global >= 50:
+        # then create the heatmap for every 10 epochs
+        if epoch_g % 10 == 0 and epoch_g != 0:
+            visualize_class_forgetting(global_model, test_dataset, task_id, training_args.task_size, training_args.memory_size, training_args.device, output_dir, epoch_g)
+    else:
+        visualize_class_forgetting(global_model, test_dataset, task_id, training_args.task_size, training_args.memory_size, training_args.device, output_dir, epoch_g)
+
     old_task_id = task_id
 
-# # Run federated learning process across multiple tasks
-# for task_id in range(training_args.tasks_global):
-#     print(f"\nStarting task {task_id + 1}/{training_args.tasks_global}")
+    # Update metrics tracker with classes_learned instead of task_id
+    metrics_tracker.update(
+        accuracy=acc_global,
+        classes_learned=classes_learned,  # Using the classes_learned variable
+        new_classes=(task_id != old_task_id)  # Still using task change to indicate new classes
+    )
     
-#     # Get classes for current task
-#     ## get the start and end classes for the current task
-#     start_class = task_id * training_args.task_size
-#     end_class = (task_id + 1) * training_args.task_size
-#     ## get the classes for the current task
-#     task_classes = list(range(start_class, end_class))
-    
-#     # Update dataset for current task classes
-#     for trainer in trainers:
-#         ## update the train loader for the current task
-#         ## this is done by updating the dataset for the trainer
-#         trainer.update_train_loader(task_classes)
-    
-#     # Train local models on clients
-#     for epoch in range(training_args.epochs_global):
-#         print(f"\nGlobal epoch {epoch + 1}/{training_args.epochs_global}")
-        
-#         # Local training on each client
-#         for client_id, trainer in enumerate(trainers):
-#             print(f"Training client {client_id + 1}/{len(trainers)}")
-            
-#             # Get old model states for knowledge distillation
-#             old_models = proxy_server.get_old_models()
-            
-#             # Train client model
-#             trainer.train(epoch, old_models)
-            
-#             # Get gradients from client training
-#             client_grads = trainer.get_gradients()
-            
-#             # Send gradients to proxy server
-#             proxy_server.receive_gradients(client_id, client_grads)
-        
-#         # Proxy server processes gradients and updates global model
-#         proxy_server.update_global_model()
-        
-#         # Check convergence through proxy monitoring
-#         if proxy_server.check_convergence():
-#             print("Training converged early")
-#             break
-    
-#     # Update global model for next task
-#     proxy_server.prepare_next_task()
 
-# print("\nTraining completed!")
-
-# # Save final model
-# torch.save(global_model.state_dict(), f"{training_args.output_dir}/final_model.pt")
+metrics_tracker.plot_metrics(output_dir)
+print('metrics plot completed')
+print('metrics saved in %s' % output_dir)
 
 
 
-# 
+# loop through 

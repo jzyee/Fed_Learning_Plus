@@ -13,10 +13,10 @@ time python scripts/train_gflc.py \
   --num_clients 10 \
   --num_classes 2 \
   --device "cuda" \
-  --local_clients 5 \
+  --local_clients 6 \
   --memory_size 1000 \
-  --epochs_local 10 \
-  --epochs_global 50 \
+  --epochs_local 20 \
+  --epochs_global 100 \
   --learning_rate 0.1 \
   --method "GLFC" \
   --task_size 2 \
