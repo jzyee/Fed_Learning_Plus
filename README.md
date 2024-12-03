@@ -91,11 +91,7 @@ Process has only been test on a Linux machine.
 
 ### 2023
 
-
-
 ---
-
-
 
 
 | model | paper name                                                          | link                                                                                                                                                                    | year | published                                                                                                                           |
@@ -112,7 +108,6 @@ Process has only been test on a Linux machine.
 | model | paper name                           | link                                     | year | published                                                                                                                                                                                                     |
 | ------- | -------------------------------------- | ------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GLFC  | Federated Class-Incremental Learning | [link](https://arxiv.org/pdf/2203.11473) | 2022 | [Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition(CVPR)](https://openaccess.thecvf.com/content/CVPR2022/html/Dong_Federated_Class-Incremental_Learning_CVPR_2022_paper.html) |
-|       |                                      |                                          |      |                                                                                                                                                                                                               |
 
 ---
 
