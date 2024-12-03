@@ -9,11 +9,18 @@ This repository is the implementation of the following paper: FCIL
 <!-- TOC -->
 
 - [Fed\_Learning\_Plus](#fed_learning_plus)
-- [Relevant Method Papers](#relevant-method-papers)
-  - [2024](#2024)
-  - [2023](#2023)
-  - [2022](#2022)
-- [Relevant Survey Papers](#relevant-survey-papers)
+  - [Introduction](#introduction)
+  - [Table of Contents](#table-of-contents)
+  - [Baselines](#baselines)
+  - [How to get script running](#how-to-get-script-running)
+    - [For Linux/Ubuntu](#for-linuxubuntu)
+  - [Hardware tested on](#hardware-tested-on)
+  - [Relevant Method Papers](#relevant-method-papers)
+    - [2024](#2024)
+    - [2023](#2023)
+    - [2022](#2022)
+  - [Relevant Survey Papers](#relevant-survey-papers)
+    - [2024](#2024-1)
 
 <!-- /TOC -->
 
@@ -24,13 +31,43 @@ This repository is the implementation of the following paper: FCIL
 
 ## How to get script running
 
-this will run the bash file and save the output of the bash file into a .txt so that the output is not lost.
+Process has only been test on a Linux machine.
+
+### For Linux/Ubuntu
+1. Please install the pre-requirements under hardware tested on section
+   1. You will need to have installed the following:
+      - CUDA toolkit
+        - [CUDA Toolkit Quick Start Guide](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html#linux)
+      - cuDNN
+        - [cuDNN Quick Start Guide](https://docs.nvidia.com/deeplearning/cudnn/support-resources/index.html)
+      
+      - a variant of anaconda or miniconda
+        - [Miniconda Installation Guide](https://docs.anaconda.com/miniconda/miniconda-install/)
+2. Create a virtual environment
+   ```
+   conda create -n fed_learning python=3.10.12
+   ```
+3. Activate the virtual environment
+   ```
+   conda activate fed_learning
+   ```
+4. Then install the requirements
+   ```
+   pip install -r requirements.txt
+   ```
+5. this will run the bash file and save the output of the bash file into a .txt so that the output is not lost.
+   ```
+   bash run_glfc_cifar10.sh > output_glfc_cifar10.txt
+   ```
 
 
 
-```
-bash run_glfc_cifar10.sh > output_glfc_cifar10.txt
-```
+## Hardware tested on
+
+- 1x A6000 48GB
+- Linux
+- Python 3.10.12
+
 
 ## Relevant Method Papers
 
