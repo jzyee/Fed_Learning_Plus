@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository is the implementation of the following paper: FCIL
+This repository implements Federated Learning for Incremental Learning with an extensible factory-style architecture, enabling seamless integration and ablation of diverse components to replicate and extend the results of the GLFC framework with a focus on running a resource-constrained experiments to identify the effectiveness of FCIL methods in a resource constrained environment.
 
 ## Table of Contents
 
@@ -11,7 +11,6 @@ This repository is the implementation of the following paper: FCIL
 - [Fed\_Learning\_Plus](#fed_learning_plus)
   - [Introduction](#introduction)
   - [Table of Contents](#table-of-contents)
-  - [Baselines](#baselines)
   - [How to get script running](#how-to-get-script-running)
     - [For Linux/Ubuntu](#for-linuxubuntu)
   - [Hardware tested on](#hardware-tested-on)
@@ -21,9 +20,9 @@ This repository is the implementation of the following paper: FCIL
     - [2022](#2022)
   - [Relevant Survey Papers](#relevant-survey-papers)
     - [2024](#2024-1)
+- [References](#references)
 
 <!-- /TOC -->
-
 
 ## How to get script running
 
@@ -72,16 +71,16 @@ Process has only been test on a Linux machine.
 ---
 
 
-| model      | paper name                                                                                                        | link                                                                                                                                                                                | year | published                                                                                                                 |
-| ------------ | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------- |
-| IOFL       | IOFL: Intelligent-Optimization-Based Federated Learning for Non-IID Data                                          | [link](https://ieeexplore.ieee.org/abstract/document/10400794?casa_token=Cc6el4Ty9RIAAAAA:UJ-Z7a0CkS9QrLOHvOYkosvioBWM3xZV4kWxbcmv6S7FOFVEC7jB4FNq5iexWQXMJ0hNKvgj9Zx5)             | 2024 | [IEEE Internet of Things Journal](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6488907)                       |
-|            | A Robust Privacy-Preserving Federated Learning Model Against Model Poisoning Attacks                              | [link](https://ieeexplore.ieee.org/abstract/document/10574838?casa_token=HmEpfwp55EAAAAAA:MWDRa0eG0JIoNr9asCy0Yn5jRojXdW7MM3rVIlUVb8ZANt-vcBN772rdtV8bFAF3-LzOBMiFitmh)             | 2024 | [IEEE Transactions on Information Forensics and Security](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=10206) |
-| Fedstellar | Fedstellar: A Platform for Decentralized Federated Learning                                                       | [link](https://)                                                                                                                                                                    | 2024 | [Expert Systems with Applications](https://www.sciencedirect.com/journal/expert-systems-with-applications)                |
-| MMVFL      | MMVFL: A simple vertical federated learning framework for multi-participant scenarios                             | [link](https://www.mdpi.com/1424-8220/24/2/619)                                                                                                                                     | 2024 | [Sensors](https://www.mdpi.com/journal/sensors/sections/sensornetworks)                                                   |
-| Fedisp     | Fedisp: an incremental subgradient proximal-based ring-type architecture for decentralized federated learning     | [link](https://link.springer.com/article/10.1007/s40747-023-01272-4)                                                                                                                | 2024 | [Complex & Intelligent Systems](https://link.springer.com/journal/40747)                                                  |
-| PI-Fed     | Continual Federated Learning With Parameter-Level Importance Aggregation                                          | [link](https://ieeexplore.ieee.org/abstract/document/10628095?casa_token=hNCao18hEsMAAAAA:snOdv4MtYydq5MKlptgTF5amoSLrZk4KiMtmaXG9HTclO4N1nU5XQnwsBYTAJ4ooPwVHot50jPHO)             | 2024 | [IEEE Internet of Things Journal](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6488907)                       |
-| SIBLS      | Self-balancing Incremental Broad Learning System with privacy protection                                          | [link](https://www.sciencedirect.com/science/article/pii/S0893608024003605?casa_token=sVP6Xgs-mA8AAAAA:FrCNBFOg6YoZAhZ3uAyIr8gp9iDiUURadnsOggPJhwMH2gU5UIkGOrkhsrxj-buRo9n5a5JaeLk) | 2024 | [Neural Networks](https://www.sciencedirect.com/journal/neural-networks)                                                  |
-| MFCL       | A Data-Free Approach to Mitigate Catastrophic Forgetting in Federated Class Incremental Learning for Vision Tasks | [link](https://proceedings.neurips.cc/paper_files/paper/2023/file/d160ea01902c33e30660851dfbac5980-Paper-Conference.pdf)                                                            | 2024 | [Advances in Neural Information Processing Systems](https://)                                                             |
+| model          | paper name                                                                                                        | link                                                                                                                                                                                | year | published                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------- |
+| IOFL           | IOFL: Intelligent-Optimization-Based Federated Learning for Non-IID Data                                          | [link](https://ieeexplore.ieee.org/abstract/document/10400794?casa_token=Cc6el4Ty9RIAAAAA:UJ-Z7a0CkS9QrLOHvOYkosvioBWM3xZV4kWxbcmv6S7FOFVEC7jB4FNq5iexWQXMJ0hNKvgj9Zx5)             | 2024 | [IEEE Internet of Things Journal](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6488907)                       |
+| auditable PPFL | A Robust Privacy-Preserving Federated Learning Model Against Model Poisoning Attacks                              | [link](https://ieeexplore.ieee.org/abstract/document/10574838?casa_token=HmEpfwp55EAAAAAA:MWDRa0eG0JIoNr9asCy0Yn5jRojXdW7MM3rVIlUVb8ZANt-vcBN772rdtV8bFAF3-LzOBMiFitmh)             | 2024 | [IEEE Transactions on Information Forensics and Security](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=10206) |
+| Fedstellar     | Fedstellar: A Platform for Decentralized Federated Learning                                                       | [link](https://)                                                                                                                                                                    | 2024 | [Expert Systems with Applications](https://www.sciencedirect.com/journal/expert-systems-with-applications)                |
+| MMVFL          | MMVFL: A simple vertical federated learning framework for multi-participant scenarios                             | [link](https://www.mdpi.com/1424-8220/24/2/619)                                                                                                                                     | 2024 | [Sensors](https://www.mdpi.com/journal/sensors/sections/sensornetworks)                                                   |
+| Fedisp         | Fedisp: an incremental subgradient proximal-based ring-type architecture for decentralized federated learning     | [link](https://link.springer.com/article/10.1007/s40747-023-01272-4)                                                                                                                | 2024 | [Complex & Intelligent Systems](https://link.springer.com/journal/40747)                                                  |
+| PI-Fed         | Continual Federated Learning With Parameter-Level Importance Aggregation                                          | [link](https://ieeexplore.ieee.org/abstract/document/10628095?casa_token=hNCao18hEsMAAAAA:snOdv4MtYydq5MKlptgTF5amoSLrZk4KiMtmaXG9HTclO4N1nU5XQnwsBYTAJ4ooPwVHot50jPHO)             | 2024 | [IEEE Internet of Things Journal](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6488907)                       |
+| SIBLS          | Self-balancing Incremental Broad Learning System with privacy protection                                          | [link](https://www.sciencedirect.com/science/article/pii/S0893608024003605?casa_token=sVP6Xgs-mA8AAAAA:FrCNBFOg6YoZAhZ3uAyIr8gp9iDiUURadnsOggPJhwMH2gU5UIkGOrkhsrxj-buRo9n5a5JaeLk) | 2024 | [Neural Networks](https://www.sciencedirect.com/journal/neural-networks)                                                  |
+| MFCL           | A Data-Free Approach to Mitigate Catastrophic Forgetting in Federated Class Incremental Learning for Vision Tasks | [link](https://proceedings.neurips.cc/paper_files/paper/2023/file/d160ea01902c33e30660851dfbac5980-Paper-Conference.pdf)                                                            | 2024 | [Advances in Neural Information Processing Systems](https://)                                                             |
 
 ---
 
@@ -128,3 +127,20 @@ Process has only been test on a Linux machine.
 | Class-Incremental Learning: A Survey                                                | [link](https://ieeexplore.ieee.org/abstract/document/10599804?casa_token=RjdcdVGTr-cAAAAA:6Sjf9d0JJAUoGmwWQNZdTtVEtbQXrjlPMien4cTTWd9-pQCEctsMHhTnUaygdW4_uN9jJusbzscN)             | 2024 | [IEEE Transactions on Pattern Analysis and Machine Intelligence](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34) |
 
 ---
+
+
+# References
+
+For the repo that is being referenced, please see the [FCIL](https://github.com/conditionWang/FCIL) repo.
+
+and cite them as follows:
+
+```
+@InProceedings{dong2022federated,
+    author = {Dong, Jiahua and Wang, Lixu and Fang, Zhen and Sun, Gan and Xu, Shichao and Wang, Xiao and Zhu, Qi},
+    title = {Federated Class-Incremental Learning},
+    booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month = {June},
+    year = {2022},
+}
+```
