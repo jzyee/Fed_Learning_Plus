@@ -34,14 +34,17 @@ This repository is the implementation of the following paper: FCIL
 Process has only been test on a Linux machine.
 
 ### For Linux/Ubuntu
+
 1. Please install the pre-requirements under hardware tested on section
    1. You will need to have installed the following:
       - CUDA toolkit
+
         - [CUDA Toolkit Quick Start Guide](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html#linux)
       - cuDNN
+
         - [cuDNN Quick Start Guide](https://docs.nvidia.com/deeplearning/cudnn/support-resources/index.html)
-      
       - a variant of anaconda or miniconda
+
         - [Miniconda Installation Guide](https://docs.anaconda.com/miniconda/miniconda-install/)
 2. Create a virtual environment
    ```
@@ -60,14 +63,11 @@ Process has only been test on a Linux machine.
    bash run_glfc_cifar10.sh > output_glfc_cifar10.txt
    ```
 
-
-
 ## Hardware tested on
 
 - 1x A6000 48GB
 - Linux
 - Python 3.10.12
-
 
 ## Relevant Method Papers
 
@@ -86,15 +86,21 @@ Process has only been test on a Linux machine.
 | PI-Fed     | Continual Federated Learning With Parameter-Level Importance Aggregation                                          | [link](https://ieeexplore.ieee.org/abstract/document/10628095?casa_token=hNCao18hEsMAAAAA:snOdv4MtYydq5MKlptgTF5amoSLrZk4KiMtmaXG9HTclO4N1nU5XQnwsBYTAJ4ooPwVHot50jPHO)             | 2024 | [IEEE Internet of Things Journal](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6488907)                       |
 | SIBLS      | Self-balancing Incremental Broad Learning System with privacy protection                                          | [link](https://www.sciencedirect.com/science/article/pii/S0893608024003605?casa_token=sVP6Xgs-mA8AAAAA:FrCNBFOg6YoZAhZ3uAyIr8gp9iDiUURadnsOggPJhwMH2gU5UIkGOrkhsrxj-buRo9n5a5JaeLk) | 2024 | [Neural Networks](https://www.sciencedirect.com/journal/neural-networks)                                                  |
 | MFCL       | A Data-Free Approach to Mitigate Catastrophic Forgetting in Federated Class Incremental Learning for Vision Tasks | [link](https://proceedings.neurips.cc/paper_files/paper/2023/file/d160ea01902c33e30660851dfbac5980-Paper-Conference.pdf)                                                            | 2024 | [Advances in Neural Information Processing Systems](https://)                                                             |
-| Fedclass   |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
-| Fedit      |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
-|            |                                                                                                                   |                                                                                                                                                                                     |      |                                                                                                                           |
 
 ---
 
 ### 2023
 
+
+
 ---
+
+
+
+
+| model | paper name                                                          | link                                                                                                                                                                    | year | published                                                                                                                           |
+| ------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| LGA   | No One Left Behind: Real-World Federated Class-Incremental Learning | [link](https://ieeexplore.ieee.org/abstract/document/10323204?casa_token=H07ZQJFzGaIAAAAA:FdRABpDLNCqXuGlXvv69esNHakxdlmgxbbWjjx-JCl9IrJZmLrxZOJFksRVeloDUtgPxE7_bocU4) | 2023 | [IEEE Transactions on Pattern Analysis and Machine Intelligence](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34)<br /> |
 
 ---
 
