@@ -24,10 +24,6 @@ This repository is the implementation of the following paper: FCIL
 
 <!-- /TOC -->
 
-## Baselines
-
-- iCaRL (incremental classifier and representation learning)
-- BiC (Bias Correction)
 
 ## How to get script running
 
