@@ -248,7 +248,8 @@ class GLFCTrainer:
                 all_label = torch.cat((all_label, labels.long().cpu()), 0)
 
         overall_avg = torch.mean(all_ent).item()
-        print(f'overall_avg: {overall_avg}')
+        print(f'overall_avg_entropy: {overall_avg}')
+        print(f'if overall_avg_entropy > 1.2 then update examplar set and old model')
         if overall_avg - self.last_entropy > 1.2:
             res = True
         
