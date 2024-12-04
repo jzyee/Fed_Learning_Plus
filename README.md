@@ -11,9 +11,11 @@ This repository implements Federated Learning for Incremental Learning with an e
 - [Fed\_Learning\_Plus](#fed_learning_plus)
   - [Introduction](#introduction)
   - [Table of Contents](#table-of-contents)
+  - [Video Demo](#video-demo)
   - [How to get script running](#how-to-get-script-running)
     - [For Linux/Ubuntu](#for-linuxubuntu)
   - [Hardware tested on](#hardware-tested-on)
+  - [File structure](#file-structure)
   - [Relevant Method Papers](#relevant-method-papers)
     - [2024](#2024)
     - [2023](#2023)
@@ -24,11 +26,18 @@ This repository implements Federated Learning for Incremental Learning with an e
 
 <!-- /TOC -->
 
+## Video Demo
+
+[![Watch the video](https://img.youtube.com/vi/flcQrno9D9g/hqdefault.jpg)](https://youtu.be/flcQrno9D9g)
+
+Video demo of the how to download and use this repository.
+
 ## How to get script running
 
 Process has only been test on a Linux machine.
 
-### For Linux/Ubuntu
+
+### For Linux/Ubuntu 
 
 1. Please install the pre-requirements under hardware tested on section
    1. You will need to have installed the following:
@@ -53,7 +62,9 @@ Process has only been test on a Linux machine.
    ```
    pip install -r requirements.txt
    ```
-5. this will run the bash file and save the output of the bash file into a .txt so that the output is not lost.
+5. Run any bash file to implement the FCIL method 
+   1. the following command will run the bash file and save the output of the bash file into a .txt so that the output is not lost.
+   2. If you want to want more detail about how to run the bash file, please see notebook/demo.ipynb. Or this video: [link](https://youtu.be/flcQrno9D9g)
    ```
    bash run_glfc_cifar10.sh > output_glfc_cifar10.txt
    ```
@@ -63,6 +74,26 @@ Process has only been test on a Linux machine.
 - 1x A6000 48GB
 - Linux
 - Python 3.10.12
+
+## File structure
+
+```
+.
+├── dataset/        # Dataset management and data loading utilities
+├── encoder/         # Data encoding and preprocessing modules
+├── eval/           # Evaluation metrics and testing frameworks
+├── model/         # Neural network architectures and model definitions
+├── notebooks/      # Jupyter notebooks for demonstrations and tutorials
+├── output/         # Storage for experiment outputs, logs, and results
+├── scripts/        # Shell scripts and experiment runners
+├── training/       # Training loops and optimization procedures
+├── utils/          # Helper functions and common utilities
+└── weight_agg/     # Weight aggregation strategies for federated learning
+```
+
+
+
+
 
 ## Relevant Method Papers
 
